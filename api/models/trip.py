@@ -6,9 +6,9 @@ from .user import User
 class Trip(models.Model):
   # define fields
   # https://docs.djangoproject.com/en/3.0/ref/models/fields/
-  name = models.CharField(max_length=100)
-  ripe = models.BooleanField()
-  color = models.CharField(max_length=100)
+  tripStart = models.DateField(null=True)
+  tripEnd = models.DateField(null=True)
+  location = models.CharField(max_length=100)
   owner = models.ForeignKey(
       User,
       on_delete=models.CASCADE
@@ -16,13 +16,13 @@ class Trip(models.Model):
 
   def __str__(self):
     # This must return a string
-    return f"The trip named '{self.name}' is {self.color} in color. It is {self.ripe} that it is ripe."
+    return f"The trip to {self.location} starts on '{self.tripStart}' and ends on {self.tripEnd}."
 
   def as_dict(self):
     """Returns dictionary version of Trip models"""
     return {
         'id': self.id,
-        'name': self.name,
-        'ripe': self.ripe,
-        'color': self.color
+        'start date': self.tripStart,
+        'end date': self.tripEnd,
+        'location': self.location
     }

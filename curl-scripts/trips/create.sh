@@ -1,15 +1,15 @@
 #!/bin/bash
 
-curl "http://localhost:8000/mangos" \
+curl "http://localhost:8000/trips" \
   --include \
   --request POST \
   --header "Content-Type: application/json" \
   --header "Authorization: Token ${TOKEN}" \
   --data '{
-    "mango": {
-      "name": "'"${NAME}"'",
-      "color": "'"${COLOR}"'",
-      "ripe": "'"${RIPE}"'"
+    "trip": {
+      "tripStart": "'"${START}"'",
+      "tripEnd": "'"${END}"'",
+      "location": "'"${loc}"'"
     }
   }'
 

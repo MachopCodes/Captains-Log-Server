@@ -1,2 +1,2 @@
-from .mango import Mango
+from .trip import Trip
 from .user import User
