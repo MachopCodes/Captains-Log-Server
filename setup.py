@@ -14,13 +14,13 @@ with open('LICENSE.md') as f:
     LICENSE = f.read()
 
 setup(
-    name='django-auth-template',
+    name='nautical_trip_planner',
     version='0.1.0',
-    description='GA SEI Boston Django Authentication Template',
+    description='Trip Planner for Nautical Events',
     long_description=README,
-    author='<author>',
-    author_email='<email>',
-    url='https://git.generalassemb.ly/ga-wdi-boston/django-auth-template',
+    author='Will Andreae',
+    author_email='wcandreae@gmail.com',
+    url='https://github.com/MachopCodes/Nautical-Trip-Planner-Server',
     license=LICENSE,
     packages=find_packages(exclude=('tests', 'docs'))
 )
