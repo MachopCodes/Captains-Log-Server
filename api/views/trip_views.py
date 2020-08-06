@@ -47,8 +47,7 @@ class TripDetail(generics.RetrieveUpdateDestroyAPIView):
     def delete(self, request, pk):
         """Delete request"""
         trip = get_object_or_404(Trip, pk=pk)
-        trip = TripSerializer(trip).data
-        if not request.user.id == trip['owner']:
+        if not request.user.id == trip.owner.id:
             raise PermissionDenied('Unauthorized, you do not own this trip')
         trip.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -61,9 +60,8 @@ class TripDetail(generics.RetrieveUpdateDestroyAPIView):
 
         # Locate trip
         trip = get_object_or_404(trip, pk=pk)
-        trip = TripSerializer(trip).data
         # Check if user is  the same
-        if not request.user.id == trip['owner']:
+        if not request.user.id == trip.owner.id:
             raise PermissionDenied('Unauthorized, you do not own this trip')
 
         # Add owner to data object now that we know this user owns the resource
