@@ -24,9 +24,9 @@ class Trips(generics.ListCreateAPIView):
     def post(self, request):
         """Create request"""
         # Add user to request object
-        request.data['trip']['owner'] = request.user.id
+        request.data['owner'] = request.user.id
         # Serialize/create trip
-        trip = TripSerializer(data=request.data['trip'])
+        trip = TripSerializer(data=request.data)
         if trip.is_valid():
             m = trip.save()
             return Response(trip.data, status=status.HTTP_201_CREATED)
@@ -54,20 +54,15 @@ class TripDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def partial_update(self, request, pk):
         """Update Request"""
-        # Remove owner from request object
-        if request.data['trip'].get('owner', False):
-            del request.data['trip']['owner']
-
         # Locate trip
-        trip = get_object_or_404(trip, pk=pk)
+        trip = get_object_or_404(Trip, pk=pk)
         # Check if user is  the same
         if not request.user.id == trip.owner.id:
             raise PermissionDenied('Unauthorized, you do not own this trip')
-
         # Add owner to data object now that we know this user owns the resource
-        request.data['trip']['owner'] = request.user.id
+        request.data['owner'] = request.user.id
         # Validate updates with serializer
-        ms = TripSerializer(trip, data=request.data['trip'])
+        ms = TripSerializer(trip, data=request.data)
         if ms.is_valid():
             ms.save()
             print(ms)
