@@ -7,9 +7,9 @@ curl "http://localhost:8000/trips" \
   --header "Authorization: Token ${TOKEN}" \
   --data '{
     "trip": {
-      "tripStart": "'"${START}"'",
-      "tripEnd": "'"${END}"'",
-      "location": "'"${loc}"'"
+      "launchDate": "'"${START}"'",
+      "latitude": "'"${LAT}"'",
+      "longitude": "'"${LON}"'"
     }
   }'
 

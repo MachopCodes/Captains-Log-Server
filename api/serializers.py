@@ -8,7 +8,7 @@ from .models.user import User
 class TripSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trip
-        fields = ('id', 'tripStart', 'tripEnd', 'location', 'owner')
+        fields = ('id', 'launchDate', 'latitude', 'longitude', 'owner')
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
