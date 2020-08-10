@@ -23,8 +23,12 @@ class Trips(generics.ListCreateAPIView):
     serializer_class = TripSerializer
     def post(self, request):
         """Create request"""
+        print('request is:', request)
+        print('request data is:', request.data)
         # Add user to request object
         request.data['owner'] = request.user.id
+        print("request.data['owner'] is: ", request.data['owner'])
+        print('request.user.id is: ', request.user.id)
         # Serialize/create trip
         trip = TripSerializer(data=request.data)
         if trip.is_valid():
