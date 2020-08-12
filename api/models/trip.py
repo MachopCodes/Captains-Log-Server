@@ -1,14 +1,16 @@
 from django.db import models
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 from .user import User
 
 # Create your models here.
 class Trip(models.Model):
   # define fields
   # https://docs.djangoproject.com/en/3.0/ref/models/fields/
-  tripStart = models.DateField(null=True)
-  tripEnd = models.DateField(null=True)
-  location = models.CharField(max_length=100)
+  launchDate = models.DateField(null=True)
+  latitude = models.FloatField(validators=[MinValueValidator(-90), MaxValueValidator(90)])
+  longitude = models.FloatField(validators=[MinValueValidator(-180), MaxValueValidator(180)])
+  city = models.CharField(null=True, max_length=100)
+  state = models.CharField(null=True, max_length=100)
   owner = models.ForeignKey(
       User,
       on_delete=models.CASCADE
@@ -16,13 +18,15 @@ class Trip(models.Model):
 
   def __str__(self):
     # This must return a string
-    return f"The trip to {self.location} starts on '{self.tripStart}' and ends on {self.tripEnd}."
+    return f"Launching from latitude {self.latitude} and longitude {self.longitude} on '{self.launchDate}'."
 
   def as_dict(self):
     """Returns dictionary version of Trip models"""
     return {
         'id': self.id,
-        'start date': self.tripStart,
-        'end date': self.tripEnd,
-        'location': self.location
+        'start date': self.launchDate,
+        'latitude': self.latitude,
+        'longitude': self.longitude,
+        'city': self.city,
+        'state': self.state
     }

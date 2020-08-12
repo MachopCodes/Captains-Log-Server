@@ -1,4 +1,4 @@
-# from rest_framework.views import APIView
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
@@ -12,6 +12,7 @@ from ..models.user import User
 class SignUp(generics.CreateAPIView):
     authentication_classes = ()
     permission_classes = ()
+    serializer_class = UserSerializer
     def post(self, request):
         user = UserSerializer(data=request.data['credentials'])
         if user.is_valid():
@@ -26,6 +27,7 @@ class SignIn(generics.CreateAPIView):
     serializer_class = UserSerializer
 
     def post(self, request):
+        print('request is:', request)
         creds = request.data['credentials']
         # We can pass our email and password along with the request to the
         # `authenticate` method. If we had used the default user, we would need

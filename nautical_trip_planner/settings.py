@@ -31,7 +31,8 @@ if os.getenv('ENV') == 'development':
   }
   
   DEBUG = True
-  CORS_ORIGIN_WHITELIST = ['http://localhost:7165']
+  CORS_ORIGIN_ALLOW_ALL = True
+  # CORS_ORIGIN_WHITELIST = ['http://localhost:7165']
 else:
   DB = dj_database_url.config()
   DEBUG = False
@@ -47,7 +48,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET')
-
+API_KEY = os.getenv('API_KEY')
 # Application definition
 
 INSTALLED_APPS = [
@@ -63,7 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [

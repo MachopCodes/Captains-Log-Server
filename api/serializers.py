@@ -3,12 +3,25 @@ from rest_framework import serializers
 
 from .models.trip import Trip
 from .models.user import User
-
+from .models.coor_pair import CoorPair
+from .models.tide import Tide
 
 class TripSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trip
-        fields = ('id', 'tripStart', 'tripEnd', 'location', 'owner')
+        fields = ('id', 'launchDate', 'latitude', 'longitude', 'city', 'state', 'owner') 
+
+class CoordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CoorPair
+        fields = '__all__'
+
+
+class TideSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tide
+        fields = ('timestamp', 'datetime', 'height', 'state', 'trip')
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
