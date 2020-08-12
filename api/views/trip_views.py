@@ -8,14 +8,12 @@ from django.contrib.auth import get_user, authenticate, login, logout
 from django.middleware.csrf import get_token
 
 from ..models.trip import Trip
-from ..serializers import TripSerializer, UserSerializer
+from ..serializers import TripSerializer
 
-# Create your views here.
 class Trips(generics.ListCreateAPIView):
     permission_classes=(IsAuthenticated,)
     def get(self, request):
         """Index request"""
-        # trips = Trip.objects.all()
         trips = Trip.objects.filter(owner=request.user.id)
         data = TripSerializer(trips, many=True).data
         return Response(data)
@@ -23,14 +21,8 @@ class Trips(generics.ListCreateAPIView):
     serializer_class = TripSerializer
     def post(self, request):
         """Create request"""
-        print('request is:', request)
-        print('request data is:', request.data)
-        # Add user to request object
-        request.data['owner'] = request.user.id
-        print("request.data['owner'] is: ", request.data['owner'])
-        print('request.user.id is: ', request.user.id)
-        # Serialize/create trip
-        trip = TripSerializer(data=request.data)
+        request.data['trip']['owner'] = request.user.id
+        trip = TripSerializer(data=request.data['trip'])
         if trip.is_valid():
             m = trip.save()
             return Response(trip.data, status=status.HTTP_201_CREATED)
@@ -58,17 +50,12 @@ class TripDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def partial_update(self, request, pk):
         """Update Request"""
-        # Locate trip
         trip = get_object_or_404(Trip, pk=pk)
-        # Check if user is  the same
         if not request.user.id == trip.owner.id:
             raise PermissionDenied('Unauthorized, you do not own this trip')
-        # Add owner to data object now that we know this user owns the resource
-        request.data['owner'] = request.user.id
-        # Validate updates with serializer
-        ms = TripSerializer(trip, data=request.data)
+        request.data['trip']['owner'] = request.user.id
+        ms = TripSerializer(trip, data=request.data['trip'])
         if ms.is_valid():
             ms.save()
-            print(ms)
             return Response(ms.data)
         return Response(ms.errors, status=status.HTTP_400_BAD_REQUEST)

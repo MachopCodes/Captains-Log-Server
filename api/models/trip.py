@@ -9,6 +9,8 @@ class Trip(models.Model):
   launchDate = models.DateField(null=True)
   latitude = models.FloatField(validators=[MinValueValidator(-90), MaxValueValidator(90)])
   longitude = models.FloatField(validators=[MinValueValidator(-180), MaxValueValidator(180)])
+  city = models.CharField(null=True, max_length=100)
+  state = models.CharField(null=True, max_length=100)
   owner = models.ForeignKey(
       User,
       on_delete=models.CASCADE
@@ -24,5 +26,7 @@ class Trip(models.Model):
         'id': self.id,
         'start date': self.launchDate,
         'latitude': self.latitude,
-        'longitude': self.longitude
+        'longitude': self.longitude,
+        'city': self.city,
+        'state': self.state
     }
