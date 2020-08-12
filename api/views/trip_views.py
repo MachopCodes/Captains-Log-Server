@@ -22,7 +22,8 @@ class Trips(generics.ListCreateAPIView):
     def post(self, request):
         """Create request"""
         request.data['trip']['owner'] = request.user.id
-        trip = TripSerializer(data=request.data['trip'])
+        print('request.data is: ', request.data)
+        trip = TripSerializer(data=request.data['trip']) 
         if trip.is_valid():
             m = trip.save()
             return Response(trip.data, status=status.HTTP_201_CREATED)
