@@ -25,8 +25,11 @@ if os.getenv('ENV') == 'development':
   DB_NAME = os.getenv('DB_NAME_DEV')
   DB = {
       'ENGINE': 'django.db.backends.postgresql',
-      'NAME': DB_NAME,
+      'NAME': 'nautical_trip_planner',
+      'USER': 'postgres',
+      'PASSWORD': '1234'
   }
+  
   DEBUG = True
   CORS_ORIGIN_WHITELIST = ['http://localhost:7165']
 else:
@@ -99,13 +102,9 @@ WSGI_APPLICATION = 'nautical_trip_planner.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'nautical_trip_planner',
-        'USER': 'postgres',
-        'PASSWORD': '1234'
+'default': DB
     }
-}
+
 
 # DRF
 REST_FRAMEWORK = {
