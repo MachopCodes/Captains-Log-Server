@@ -1,4 +1,4 @@
-**Captains Log** is a single page application that allows users to plan their boating trips with tide insights. As an avid sailor, I can attest that leaving with or against the tides can be the deciding factor on completing the leg of a sailing trip before the sun goes down. The inspiration for this application was to give sailors and nautical enthusiasts a place to plan their trips and easilly access information related to tides. 
+**Captains Log** is a single page application that allows users to plan their boating trips with tide insights. As an avid sailor, I can attest that leaving with or against the tides can be the deciding factor on completing the leg of a sailing trip before the sun goes down. The inspiration for this application was to give sailors and nautical enthusiasts a place to plan their trips and easilly access information related to tides.
 
 To use Captain's Log, create an account (must be an email address and password > 5 characters long), create a trip (submit a launch date, with city and state you are leaving from). You can then view your trip(s) and select a trip to view details (tidal information) as well as update trip information or delete the trip.
 
@@ -22,11 +22,11 @@ As a registered user I would like to be able to access tidal information related
 
 **Unsolved Problems & Planned Features**
 Encoding the api key into the server side
-Develop a component that simultaneously creates a route, fetches and saves tide data into a database on the serverside to minimize interaction with a foreign api. 
-Develop a method to sort trips by date and auto archive past trips. 
+Develop a component that simultaneously creates a route, fetches and saves tide data into a database on the serverside to minimize interaction with a foreign api.
+Develop a method to sort trips by date and auto archive past trips.
 Develop a method to join trips (singular launch dates) into one complete journey.
-Develop a component to track equipment to log servicing or equipment. 
-Modify the coordinate table from ALL U.S towns & cities to COASTAL global towns & cities. 
+Develop a component to track equipment to log servicing or equipment.
+Modify the coordinate table from ALL U.S towns & cities to COASTAL global towns & cities.
 
 **Server Routes**
 |Request Type |     Path            |                 Description        |   Auth    |
