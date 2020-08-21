@@ -1,5 +1,5 @@
 """
-WSGI config for nautical_trip_planner_template project.
+WSGI config for Captain's Log project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

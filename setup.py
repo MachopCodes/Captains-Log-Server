@@ -14,13 +14,13 @@ with open('LICENSE.md') as f:
     LICENSE = f.read()
 
 setup(
-    name='nautical_trip_planner',
+    name='Captains Log',
     version='0.1.0',
     description='Trip Planner for Nautical Events',
     long_description=README,
     author='Will Andreae',
     author_email='wcandreae@gmail.com',
-    url='https://github.com/MachopCodes/Nautical-Trip-Planner-Server',
+    url='https://github.com/MachopCodes/Captains-Log-Server',
     license=LICENSE,
     packages=find_packages(exclude=('tests', 'docs'))
 )
